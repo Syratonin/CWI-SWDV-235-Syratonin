@@ -27,6 +27,6 @@ public class Main {
                         </html>
                         """);
             });
-        });
+        }).start(7070);
     }
 }
