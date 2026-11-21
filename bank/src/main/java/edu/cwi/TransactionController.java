@@ -46,8 +46,18 @@ public class TransactionController implements CrudHandler {
 
     @Override
     public void getAll(Context ctx) {
-        ctx.render("jte/transactionsPage.jte",
-                Map.of("transactions", transactions));
+
+        UserAccount account = new UserAccount(
+                "John",
+                12500.50,
+                transactions);
+
+        ctx.render("jte/accountPage.jte",
+                Map.of(
+                        "title", "My Bank Account",
+                        "account", account));
+        // ctx.render("jte/transactionsPage.jte",
+        // Map.of("transactions", transactions));
     }
 
     // Use ctx to render all transactions html
