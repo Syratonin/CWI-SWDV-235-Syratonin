@@ -4,14 +4,13 @@ import edu.cwi.TransactionController;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import static io.javalin.apibuilder.ApiBuilder.*;
+import io.javalin.rendering.template.JavalinJte;
 
-/**
- * Hello world!
- *
- */
 public class Main {
     public static void main(String[] args) {
         var app = Javalin.create(config -> {
+
+            config.fileRenderer(new JavalinJte());
 
             config.staticFiles.add("/public", Location.CLASSPATH);
 
@@ -24,9 +23,7 @@ public class Main {
             });
 
             config.routes.apiBuilder(() -> {
-                path("/transactions", () -> {
-                    crud("/{id}", new TransactionController());
-                });
+                crud("transactions/{id}", new TransactionController());
             });
 
         });
