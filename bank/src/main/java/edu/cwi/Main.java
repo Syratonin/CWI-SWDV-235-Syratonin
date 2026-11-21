@@ -1,7 +1,9 @@
 package edu.cwi;
 
+import edu.cwi.TransactionController;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
+import static io.javalin.apibuilder.ApiBuilder.*;
 
 /**
  * Hello world!
@@ -21,6 +23,13 @@ public class Main {
                 ctx.redirect("/");
             });
 
-        }).start(7070);
+            config.routes.apiBuilder(() -> {
+                path("/transactions", () -> {
+                    crud("/{id}", new TransactionController());
+                });
+            });
+
+        });
+        app.start(7070);
     }
 }
